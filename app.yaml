@@ -1,8 +1,9 @@
 runtime: python39
-service: medical-news-free  # Separate service name
+service: medical-news-free  # Optional service name
 
-entrypoint: gunicorn --bind :$PORT main:app
+entrypoint: gunicorn --bind :$PORT main:app  # Your launch command
 
 instance_class: F1  # Free tier instance
-manual_scaling:
-  instances: 1  # Always runs 1 instance (free quota)
+automatic_scaling:  # Required for F1 instances
+  max_instances: 1  # Limits to free quota
+  min_instances: 0  # Allows scaling to zero
